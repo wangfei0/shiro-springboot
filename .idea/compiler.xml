@@ -6,14 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shiro-springboot" />
         <module name="springbootshiro" />
+        <module name="shiro-springboot (1)" />
+        <module name="shiro-springboot" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="shiro-springboot" options="-parameters" />
+      <module name="shiro-springboot" options="" />
+      <module name="shiro-springboot (1)" options="-parameters" />
     </option>
   </component>
 </project>

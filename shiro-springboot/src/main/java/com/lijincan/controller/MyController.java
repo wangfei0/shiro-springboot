@@ -45,13 +45,18 @@ public class MyController {
         return "login";
     }
     @RequestMapping("/login")
-    public String login(String username,String password,Model model){
+    public String login(String username,String password,String remember,Model model){
         //获取当前用户
         Subject subject = SecurityUtils.getSubject();
         //封装用户登录数据
         UsernamePasswordToken token =new UsernamePasswordToken(username,password);
-
+        /*记住我*/
+        /*要实现记住我，实体类必须继承系列化接口Serializable*/
+        token.setRememberMe(("on".equals(remember))?true:false);
         try{
+            /**
+             * 登录
+             */
             subject.login(token);
             return "index";
         }catch (UnknownAccountException e){//用户名不存在

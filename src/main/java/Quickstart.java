@@ -61,9 +61,11 @@ public class Quickstart {
         // Now that a simple Shiro environment is set up, let's see what you can do:
 
         // get the currently executing user:
+        /*获取当前用户对象*/
         Subject currentUser = SecurityUtils.getSubject();
 
         // Do some stuff with a Session (no need for a web or EJB container!!!)
+        /*通过当前用户拿到session*/
         Session session = currentUser.getSession();
         session.setAttribute("someKey", "aValue");
         String value = (String) session.getAttribute("someKey");
@@ -72,10 +74,14 @@ public class Quickstart {
         }
 
         // let's login the current user so we can check against roles and permissions:
+        /*判断当前用户是否被认证*/
         if (!currentUser.isAuthenticated()) {
+            /*令牌，随机*/
             UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
+            /*设置记住我*/
             token.setRememberMe(true);
             try {
+                /*执行登陆操作*/
                 currentUser.login(token);
             } catch (UnknownAccountException uae) {
                 log.info("There is no user with username of " + token.getPrincipal());
@@ -93,9 +99,11 @@ public class Quickstart {
 
         //say who they are:
         //print their identifying principal (in this case, a username):
+        /*获取当前用户得信息*/
         log.info("User [" + currentUser.getPrincipal() + "] logged in successfully.");
 
         //test a role:
+        /*角色*/
         if (currentUser.hasRole("schwartz")) {
             log.info("May the Schwartz be with you!");
         } else {
@@ -103,6 +111,7 @@ public class Quickstart {
         }
 
         //test a typed permission (not instance-level)
+        /*粗粒度权限*/
         if (currentUser.isPermitted("lightsaber:wield")) {
             log.info("You may use a lightsaber ring.  Use it wisely.");
         } else {
@@ -110,6 +119,7 @@ public class Quickstart {
         }
 
         //a (very powerful) Instance Level permission:
+        /*细粒度权限*/
         if (currentUser.isPermitted("winnebago:drive:eagle5")) {
             log.info("You are permitted to 'drive' the winnebago with license plate (id) 'eagle5'.  " +
                     "Here are the keys - have fun!");
@@ -118,8 +128,10 @@ public class Quickstart {
         }
 
         //all done - log out!
+        /*注销*/
         currentUser.logout();
 
+        /*退出结束*/
         System.exit(0);
     }
 }
